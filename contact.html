@@ -47,7 +47,8 @@
             window.dataLayer.push({
                 'event': 'purchase_complete',
                 'transaction_value': document.getElementById('product_type').value === 'buds_pro' ? 199 : 399,
-                'product_name': document.getElementById('product_type').value
+                'product_name': document.getElementById('product_type').value,
+                'customer_email': document.getElementById('cust_email').value // New for practice!
             });
         });
     </script>
