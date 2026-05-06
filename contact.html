@@ -37,20 +37,28 @@
     </div>
 
     <script>
-        document.getElementById('purchase-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            this.style.display = 'none';
-            document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('purchase-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // UI Changes
+        this.style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
 
-            // IMPORTANT: This pushes data to GTM
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'purchase_complete',
-                'transaction_value': document.getElementById('product_type').value === 'buds_pro' ? 199 : 399,
-                'product_name': document.getElementById('product_type').value,
-                'customer_email': document.getElementById('cust_email').value // New for practice!
-            });
+        // 1. Grab the selected option element
+        const selectedOption = document.getElementById('product_type').selectedOptions[0];
+        
+        // 2. Extract the price from the data-price attribute we added to the HTML
+        const price = selectedOption.getAttribute('data-price');
+
+        // 3. Push to Data Layer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'purchase_complete',
+            'transaction_value': Number(price), // Converts the text "199" to a number 199
+            'product_name': selectedOption.value,
+            'customer_email': document.getElementById('cust_email').value
         });
-    </script>
+    });
+</script>
 </body>
 </html>
