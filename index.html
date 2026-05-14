@@ -130,6 +130,29 @@
     </div>
 </section>
 
+  <section id="cookie-lab" style="padding: 30px; background: #fffdf0; border: 2px solid #f1c40f; margin: 20px; border-radius: 10px;">
+    <h2>Cookie Mastery Lab</h2>
+    <p>Current VIP Status: <span id="vip-status-display" style="font-weight: bold; color: #f1c40f;">Standard User</span></p>
+    
+    <button onclick="setVIPCookie()" style="padding: 10px; cursor: pointer;">Upgrade to VIP (Sets Cookie)</button>
+    <button onclick="clearVIPCookie()" style="padding: 10px; cursor: pointer;">Reset (Clear Cookie)</button>
+</section>
+
+<script>
+function setVIPCookie() {
+    // This sets a cookie named 'user_level' with value 'VIP' that expires in 1 day
+    document.cookie = "user_level=VIP; path=/; max-age=" + (24*60*60);
+    document.getElementById('vip-status-display').innerText = "VIP User";
+    alert("Cookie Set: user_level=VIP. Now GTM can read this!");
+}
+
+function clearVIPCookie() {
+    document.cookie = "user_level=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.getElementById('vip-status-display').innerText = "Standard User";
+    alert("Cookie Cleared.");
+}
+</script>
+
   <section id="high-interest-lab" style="padding: 40px; background: #f0f7ff; border: 2px solid #0071e3; margin: 20px; border-radius: 15px;">
     <h2>High Interest Mastery Lab</h2>
     <p>Step 1: Read our detailed feature list (Scroll down).</p>
