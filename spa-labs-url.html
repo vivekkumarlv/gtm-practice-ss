@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-54PSXBT7');</script>
+
+    <meta charset="UTF-8">
+    <title>SPA Simulation Lab</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 20px; background: #f5f5f7; }
+        nav { background: #333; padding: 15px; border-radius: 8px; }
+        nav a { color: white; margin-right: 20px; text-decoration: none; cursor: pointer; font-weight: bold; }
+        #view-viewport { background: white; padding: 40px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); min-height: 200px; }
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54PSXBT7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav>
+        <a onclick="navigateTo('/spa-home')">SPA Home</a>
+        <a onclick="navigateTo('/spa-products')">SPA Products</a>
+        <a onclick="navigateTo('/spa-checkout')">SPA Checkout</a>
+    </nav>
+
+    <div id="view-viewport">
+        <h2>Welcome to the SPA Home Screen</h2>
+        <p>This is the initial state. No page reload has happened yet.</p>
+    </div>
+
+    <script>
+        // 1. Our Mock Database of Pages
+        const pages = {
+            '/spa-home': '<h2>Welcome to the SPA Home Screen</h2><p>This is the initial state. No page reload has happened yet.</p>',
+            '/spa-products': '<h2>Our Premium Products</h2><p>Browsing items inside a virtual routing viewport.</p>',
+            '/spa-checkout': '<h2>Virtual Checkout Gateway</h2><p>Ready to process your order seamlessly.</p>'
+        };
+
+        // 2. The Custom SPA Router Function
+        function navigateTo(urlPath) {
+            // Update the browser's URL bar without a page reload
+            window.history.pushState({}, "", urlPath);
+            
+            // Swap out the text contents inside our viewport container
+            document.getElementById('view-viewport').innerHTML = pages[urlPath];
+            
+            console.log("SPA Route changed to: " + urlPath);
+        }
+
+        // Listen for the browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            const currentPath = window.location.pathname; 
+            if(pages[currentPath]) {
+                document.getElementById('view-viewport').innerHTML = pages[currentPath];
+            }
+        });
+    </script>
+</body>
+</html>
